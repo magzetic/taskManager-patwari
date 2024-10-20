@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Login Form -->
+    <div id="login-container">
+      <form id="access-form">
+        <label for="accessCode">Enter Access Code:</label>
+        <input
+          type="password"
+          id="accessCode"
+          placeholder="Access Code"
+          required
+        />
+        <button type="submit">Login</button>
+      </form>
+      <p id="error-message" style="color: red; display: none">
+        Invalid Access Code
+      </p>
+    </div>
+
+    <!-- Task Manager Interface -->
+    <div id="task-manager" style="display: none">
+      <h1>Task Manager</h1>
+
+      <table id="task-table">
+        <thead>
+          <tr>
+            <th>Sr Number</th>
+            <th>Name</th>
+            <th>Task</th>
+            <th>Mobile Number</th>
+            <th>Village</th>
+            <th>Remark 1</th>
+            <th>Remark 2</th>
+            <th>Deadline</th>
+            <th>Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Dynamic rows will be added here by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
