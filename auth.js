@@ -1,4 +1,4 @@
-import supabase from './supabaseClient.js';
+import supabase from './supabaseClient.js'; // Ensure this matches the export in supabaseClient.js
 
 async function authenticate(accessCode) {
     const { data, error } = await supabase
@@ -15,6 +15,7 @@ async function authenticate(accessCode) {
     return data !== null;
 }
 
+// Event listener for login button
 document.getElementById('login-button').addEventListener('click', async () => {
     const accessCode = document.getElementById('access-code').value;
 

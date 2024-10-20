@@ -1,4 +1,4 @@
-import supabase from './supabaseClient.js';
+import supabase from './supabaseClient.js'; // Ensure this matches the export in supabaseClient.js
 
 async function fetchTasks() {
     const { data, error } = await supabase
@@ -34,6 +34,7 @@ async function deleteTask(taskId) {
     }
 }
 
+// Event listener for adding a task
 document.getElementById('add-task-button').addEventListener('click', async () => {
     const task = {
         name: document.getElementById('task-name').value,
