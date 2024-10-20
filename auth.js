@@ -1,16 +1,29 @@
+import supabase from './supabaseClient.js';
+
 async function authenticate(accessCode) {
-  // Fetch the access code from the AccessControl table
-  const { data, error } = await supabase
-      .from('AccessControl') // Using your actual table name
-      .select('access_code')  // Using the correct column name
-      .eq('access_code', accessCode) // Filter to match the entered access code
-      .single();             // We expect only one result
+    const { data, error } = await supabase
+        .from('AccessControl')
+        .select('access_code')
+        .eq('access_code', accessCode)
+        .single();
 
-  if (error) {
-      console.error('Error fetching access code:', error);
-      return false; // Authentication failed due to error
-  }
+    if (error) {
+        console.error('Error fetching access code:', error);
+        return false;
+    }
 
-  // Check if a matching access code was found
-  return data !== null; // Return true if an access code exists, false otherwise
+    return data !== null;
 }
+
+document.getElementById('login-button').addEventListener('click', async () => {
+    const accessCode = document.getElementById('access-code').value;
+
+    const isAuthenticated = await authenticate(accessCode);
+
+    if (isAuthenticated) {
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('task-manager').style.display = 'block';
+    } else {
+        alert('Invalid access code!');
+    }
+});

@@ -3,49 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>        <!-- Main script for initializing the app -->
-
-    <link rel="stylesheet" href="styles.css"> <!-- Linking your CSS file -->
+    <link rel="stylesheet" href="styles.css">
     <title>Task Manager</title>
 </head>
 <body>
+    <h1>Task Manager</h1>
+    
     <div id="login-container">
-        <h1>Login</h1>
-        <form id="login-form">
-            <label for="access-code">Access Code:</label>
-            <input type="text" id="access-code" required>
-            <button type="submit">Login</button>
-            <div id="error-message"></div>
-        </form>
+        <h2>Login</h2>
+        <input type="text" id="access-code" placeholder="Enter Access Code" />
+        <button id="login-button">Login</button>
     </div>
-
+    
     <div id="task-manager" style="display:none;">
-        <h1>Task Manager</h1>
-        <table id="task-table">
-            <thead>
-                <tr>
-                    <th>Sr No</th>
-                    <th>Name</th>
-                    <th>Task</th>
-                    <th>Mobile Number</th>
-                    <th>Village</th>
-                    <th>Remark 1</th>
-                    <th>Remark 2</th>
-                    <th>Deadline</th>
-                    <th>Amount</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Task rows will be inserted here dynamically -->
-            </tbody>
-        </table>
+        <h2>Manage Tasks</h2>
+        <input type="text" id="task-name" placeholder="Task Name" />
+        <input type="text" id="mobile-number" placeholder="Mobile Number" />
+        <input type="text" id="remark1" placeholder="Remark 1" />
+        <input type="text" id="remark2" placeholder="Remark 2" />
+        <input type="date" id="deadline" />
+        <input type="number" id="amount" placeholder="Amount" />
+        <input type="text" id="village" placeholder="Village" />
+        <button id="add-task-button">Add Task</button>
+        
+        <ul id="task-list"></ul>
     </div>
 
-    <!-- Linking your JavaScript files -->
-    <script src="supabaseClient.js"></script> <!-- Supabase client setup -->
-    <script src="auth.js"></script>          <!-- Handles authentication -->
-    <script src="taskManager.js"></script>   <!-- Handles task management -->
-    <script src="script.js"></script> <!-- Main script for initializing the app -->
+    <script type="module" src="supabaseClient.js"></script>
+    <script type="module" src="auth.js"></script>
+    <script type="module" src="taskManager.js"></script>
+    <script type="module" src="script.js"></script> <!-- Main script -->
 </body>
 </html>

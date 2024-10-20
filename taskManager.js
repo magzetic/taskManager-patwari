@@ -1,52 +1,68 @@
-async function loadTasks() {
-  // Fetch tasks from Supabase and display them
-  const { data: tasks, error } = await supabase
-      .from('Tasks')
-      .select('*');
-  
-  if (error) {
-      console.error('Error fetching tasks:', error);
-      return;
-  }
+import supabase from './supabaseClient.js';
 
-  const tbody = document.querySelector('#task-table tbody');
-  tbody.innerHTML = ''; // Clear existing tasks
+async function fetchTasks() {
+    const { data, error } = await supabase
+        .from('Tasks')
+        .select('*');
 
-  tasks.forEach((task, index) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${task.name}</td>
-          <td>${task.task}</td>
-          <td>${task.mobile_number}</td>
-          <td>${task.village}</td>
-          <td>${task.remark1}</td>
-          <td>${task.remark2}</td>
-          <td>${task.deadline}</td>
-          <td>${task.amount}</td>
-          <td>
-              <button class="edit" onclick="editTask(${task.id})">Edit</button>
-              <button class="delete" onclick="deleteTask(${task.id})">Delete</button>
-          </td>
-      `;
-      tbody.appendChild(row);
-  });
+    if (error) {
+        console.error('Error fetching tasks:', error);
+        return [];
+    }
+
+    return data;
 }
 
-async function editTask(taskId) {
-  // Logic to edit a task
+async function addTask(task) {
+    const { error } = await supabase
+        .from('Tasks')
+        .insert([task]);
+
+    if (error) {
+        console.error('Error adding task:', error);
+    }
 }
 
 async function deleteTask(taskId) {
-  // Logic to delete a task
-  const { error } = await supabase
-      .from('Tasks')
-      .delete()
-      .eq('id', taskId);
+    const { error } = await supabase
+        .from('Tasks')
+        .delete()
+        .match({ id: taskId });
 
-  if (error) {
-      console.error('Error deleting task:', error);
-  } else {
-      loadTasks(); // Refresh task list after deletion
-  }
+    if (error) {
+        console.error('Error deleting task:', error);
+    }
 }
+
+document.getElementById('add-task-button').addEventListener('click', async () => {
+    const task = {
+        name: document.getElementById('task-name').value,
+        mobile_number: document.getElementById('mobile-number').value,
+        remark1: document.getElementById('remark1').value,
+        remark2: document.getElementById('remark2').value,
+        deadline: document.getElementById('deadline').value,
+        amount: document.getElementById('amount').value,
+        village: document.getElementById('village').value
+    };
+
+    await addTask(task);
+    loadTasks();
+});
+
+async function loadTasks() {
+    const tasks = await fetchTasks();
+    const taskList = document.getElementById('task-list');
+    taskList.innerHTML = '';
+
+    tasks.forEach(task => {
+        const taskItem = document.createElement('li');
+        taskItem.classList.add('task-item');
+        taskItem.innerHTML = `
+            <div>${task.name} - ${task.amount}</div>
+            <button onclick="deleteTask(${task.id})">Delete</button>
+        `;
+        taskList.appendChild(taskItem);
+    });
+}
+
+loadTasks();
