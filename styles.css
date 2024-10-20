@@ -12,8 +12,7 @@ h1 {
 }
 
 /* Container Styles */
-#login-container,
-#task-manager {
+#login-container, #task-manager {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
@@ -33,10 +32,9 @@ label {
   font-weight: bold;
 }
 
-input[type='password'],
-input[type='text'],
-input[type='number'],
-input[type='date'] {
+input[type="text"], 
+input[type="number"], 
+input[type="date"] {
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -71,7 +69,7 @@ button:hover {
   margin-top: 20px;
 }
 
-#task-table th,
+#task-table th, 
 #task-table td {
   border: 1px solid #ddd;
   padding: 8px;
@@ -92,7 +90,7 @@ button:hover {
 }
 
 /* Action Button Styles */
-button.edit,
+button.edit, 
 button.delete {
   padding: 5px 10px;
   border: none;
